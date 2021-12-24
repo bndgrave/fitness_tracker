@@ -80,8 +80,7 @@ class Running(Training):
         val = (
             (cal_cff_1 * self.get_mean_speed()
                 - cal_cff_2) * self.weight
-            / Training.M_IN_KM * self.duration * 60
-             )
+            / Training.M_IN_KM * self.duration * 60)
         return val
 
 
@@ -105,8 +104,7 @@ class SportsWalking(Training):
         val = (
             (cal_cff_1 * self.weight
                 + (self.get_mean_speed() ** cal_cff_2 // self.height)
-                * cal_cff_3 * self.weight) * self.duration * 60
-             )
+                * cal_cff_3 * self.weight) * self.duration * 60)
         return val
 
 
