@@ -81,7 +81,7 @@ class Running(Training):
             (cal_cff_1 * self.get_mean_speed()
                 - cal_cff_2) * self.weight
             / Training.M_IN_KM * self.duration * 60
-               )
+              )
         return val
 
 
@@ -106,7 +106,7 @@ class SportsWalking(Training):
             (cal_cff_1 * self.weight
                 + (self.get_mean_speed() ** cal_cff_2 // self.height)
                 * cal_cff_3 * self.weight) * self.duration * 60
-               )
+              )
         return val
 
 
@@ -146,14 +146,14 @@ def read_package(workout_type: str, data: list) -> Training:
             action=data[0],
             duration=data[1],
             weight=data[2]
-                                      )
+                                    )
     elif (len(data) == 4) and (workout_type == 'WLK'):
         val = class_ids[workout_type](
             action=data[0],
             duration=data[1],
             weight=data[2],
             height=data[3]
-                                      )
+                                    )
     elif (len(data) == 5) and (workout_type == 'SWM'):
         val = class_ids[workout_type](
             action=data[0],
@@ -161,7 +161,7 @@ def read_package(workout_type: str, data: list) -> Training:
             weight=data[2],
             length_pool=data[3],
             count_pool=data[4]
-                                      )
+                                    )
     return val
 
 
