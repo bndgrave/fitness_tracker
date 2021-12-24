@@ -19,7 +19,7 @@ class InfoMessage:
                f'Дистанция: {self.distance:.3f} км; '
                f'Ср. скорость: {self.speed:.3f} км/ч; '
                f'Потрачено ккал: {self.calories:.3f}.'
-              )
+               )
         return val
 
 
@@ -37,7 +37,7 @@ class Training:
         self.action = action
         self.duration = duration
         self.weight = weight
-    
+
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
         val1 = self.action * self.LEN_STEP / Training.M_IN_KM
@@ -58,7 +58,7 @@ class Training:
         dur: float = self.duration
         dis: float = self.get_distance()
         spd: float = self.get_mean_speed()
-        cal: float  = self.get_spent_calories()
+        cal: float = self.get_spent_calories()
         msg = InfoMessage(tp, dur, dis, spd, cal)
         return msg
 
@@ -74,15 +74,15 @@ class Running(Training):
         super().__init__(action, duration, weight)
 
     def get_spent_calories(self) -> float:
-         """Получить количество затраченных калорий."""
-         cal_cff_1 = 18
-         cal_cff_2 = 20
-         val = (
-             (cal_cff_1 * self.get_mean_speed() 
-             - cal_cff_2) * self.weight /
-             Training.M_IN_KM * self.duration * 60
-             )
-         return val
+        """Получить количество затраченных калорий."""
+        cal_cff_1 = 18
+        cal_cff_2 = 20
+        val = (
+                (cal_cff_1 * self.get_mean_speed()
+                - cal_cff_2) * self.weight
+                / Training.M_IN_KM * self.duration * 60
+            )
+        return val
 
 
 class SportsWalking(Training):
@@ -103,10 +103,10 @@ class SportsWalking(Training):
         cal_cff_2 = 2
         cal_cff_3 = 0.029
         val = (
-               (cal_cff_1 * self.weight + 
-               (self.get_mean_speed() ** cal_cff_2 // self.height) *
-               cal_cff_3 * self.weight) * self.duration * 60
-               )
+                (cal_cff_1 * self.weight 
+                + (self.get_mean_speed() ** cal_cff_2 // self.height)
+                * cal_cff_3 * self.weight) * self.duration * 60
+                )
         return val
 
 
@@ -120,15 +120,15 @@ class Swimming(Training):
                  duration: float,
                  weight: float,
                  length_pool: float,
-                 count_pool: int,         
+                 count_pool: int,
                  ) -> None:
         super().__init__(action, duration, weight)
         self.length_pool = length_pool
         self.count_pool = count_pool
 
     def get_mean_speed(self) -> float:
-        val = (self.length_pool * self.count_pool /
-               Training.M_IN_KM / self.duration)
+        val = (self.length_pool * self.count_pool
+               / Training.M_IN_KM / self.duration)
         return val
 
     def get_spent_calories(self) -> float:
@@ -143,26 +143,26 @@ def read_package(workout_type: str, data: list) -> Training:
     class_ids = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
     if (len(data) == 3) and (workout_type == 'RUN'):
         val = class_ids[workout_type](
-                                      action = data[0], 
-                                      duration = data[1], 
-                                      weight = data[2]
-                                      )
+                                    action = data[0],
+                                    duration = data[1],
+                                    weight = data[2]
+                                    )
     elif (len(data) == 4) and (workout_type == 'WLK'):
         val = class_ids[workout_type](
-                                      action = data[0], 
-                                      duration = data[1], 
-                                      weight = data[2], 
-                                      height = data[3]
-                                      )
+                                    action = data[0],
+                                    duration = data[1],
+                                    weight = data[2],
+                                    height = data[3]
+                                    )
     elif (len(data) == 5) and (workout_type == 'SWM'):
         val = class_ids[workout_type](
-                                      action = data[0], 
-                                      duration = data[1], 
-                                      weight = data[2], 
-                                      length_pool = data[3], 
-                                      count_pool = data[4],
-                                      )
-    return val       
+                                    action = data[0],
+                                    duration = data[1],
+                                    weight = data[2],
+                                    length_pool = data[3],
+                                    count_pool = data[4]
+                                    )
+    return val
 
 
 def main(training: Training) -> None:
