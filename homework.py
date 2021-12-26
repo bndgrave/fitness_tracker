@@ -63,13 +63,6 @@ class Training:
 class Running(Training):
     """Тренировка: бег."""
 
-    # def __init__(self,
-    #              action: int,
-    #              duration: float,
-    #              weight: float,
-    #              ) -> None:
-    #     super().__init__(action, duration, weight)
-
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         SPD_MULT = 18
@@ -134,24 +127,6 @@ class Swimming(Training):
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     class_names = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    # if (len(data) == 3) and (workout_type == 'RUN'):
-    #     val = class_ids[workout_type](
-    #         action=data[0],
-    #         duration=data[1],
-    #         weight=data[2])
-    # elif (len(data) == 4) and (workout_type == 'WLK'):
-    #     val = class_ids[workout_type](
-    #         action=data[0],
-    #         duration=data[1],
-    #         weight=data[2],
-    #         height=data[3])
-    # elif (len(data) == 5) and (workout_type == 'SWM'):
-    #     val = class_ids[workout_type](
-    #         action=data[0],
-    #         duration=data[1],
-    #         weight=data[2],
-    #         length_pool=data[3],
-    #         count_pool=data[4])
     return class_names[workout_type](*data)
 
 
