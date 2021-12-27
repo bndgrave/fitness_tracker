@@ -1,26 +1,44 @@
+from dataclasses import dataclass
+
+@dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    def __init__(self,
-                 training_type: str,
-                 duration: float,
-                 distance: float,
-                 speed: float,
-                 calories: float
-                 ) -> None:
-        self.training_type = training_type
-        self.duration = duration
-        self.distance = distance
-        self.speed = speed
-        self.calories = calories
+
+    training_type: str
+    duration: float
+    distance: float
+    speed: float
+    calories: float
+
+    MSG_TMPLT = ('Тип тренировки: {}; Длительность: {:.3f} ч.; '
+        'Дистанция: {:.3f} км; Ср. скорость: {:.3f} км/ч; '
+        'Потрачено ккал: {:.3f}.')
 
     def get_message(self) -> str:
-        val = (f'Тип тренировки: {self.training_type}; '
-               f'Длительность: {self.duration:.3f} ч.; '
-               f'Дистанция: {self.distance:.3f} км; '
-               f'Ср. скорость: {self.speed:.3f} км/ч; '
-               f'Потрачено ккал: {self.calories:.3f}.'
-               )
-        return val
+        return self.MSG_TMPLT.format(self.training_type,
+            self.duration, self.distance, self.speed, 
+            self.calories)
+
+# class InfoMessage:
+#     """Информационное сообщение о тренировке."""
+#     training_type: str
+#     duration: float
+#     distance: float
+#     speed: float
+#     calories: float
+
+#     MSG_TMPLT = Template('Тип тренировки: $type; Длительность: ')
+#     INP_LIST = list(self.training_type)
+
+#     def get_message(self) -> str:
+        # val = (f'Тип тренировки: {self.training_type}; '
+        #        f'Длительность: {self.duration:.3f} ч.; '
+        #        f'Дистанция: {self.distance:.3f} км; '
+        #        f'Ср. скорость: {self.speed:.3f} км/ч; '
+        #        f'Потрачено ккал: {self.calories:.3f}.'
+        #        )
+        # return val
+        pass
 
 
 class Training:
@@ -48,7 +66,7 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        pass
+        raise(NotImplementedError('Метод get_spent_calories не определен'))
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -106,7 +124,7 @@ class Swimming(Training):
                  duration: float,
                  weight: float,
                  length_pool: float,
-                 count_pool: int,
+                 count_pool: float,
                  ) -> None:
         super().__init__(action, duration, weight)
         self.length_pool = length_pool
@@ -127,7 +145,10 @@ class Swimming(Training):
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     class_names = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    return class_names[workout_type](*data)
+    if workout_type not in class_names.keys():
+        raise(ValueError('Тип тренировки не определен'))
+    else:
+        return class_names[workout_type](*data)
 
 
 def main(training: Training) -> None:
