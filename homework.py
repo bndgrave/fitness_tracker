@@ -19,27 +19,6 @@ class InfoMessage:
             self.duration, self.distance, self.speed, 
             self.calories)
 
-# class InfoMessage:
-#     """Информационное сообщение о тренировке."""
-#     training_type: str
-#     duration: float
-#     distance: float
-#     speed: float
-#     calories: float
-
-#     MSG_TMPLT = Template('Тип тренировки: $type; Длительность: ')
-#     INP_LIST = list(self.training_type)
-
-#     def get_message(self) -> str:
-        # val = (f'Тип тренировки: {self.training_type}; '
-        #        f'Длительность: {self.duration:.3f} ч.; '
-        #        f'Дистанция: {self.distance:.3f} км; '
-        #        f'Ср. скорость: {self.speed:.3f} км/ч; '
-        #        f'Потрачено ккал: {self.calories:.3f}.'
-        #        )
-        # return val
-        pass
-
 
 class Training:
     """Базовый класс тренировки."""
