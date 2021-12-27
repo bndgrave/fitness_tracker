@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
@@ -11,13 +12,13 @@ class InfoMessage:
     calories: float
 
     MSG_TMPLT = ('Тип тренировки: {}; Длительность: {:.3f} ч.; '
-        'Дистанция: {:.3f} км; Ср. скорость: {:.3f} км/ч; '
-        'Потрачено ккал: {:.3f}.')
+                'Дистанция: {:.3f} км; Ср. скорость: {:.3f} км/ч; '
+                'Потрачено ккал: {:.3f}.')
 
     def get_message(self) -> str:
         return self.MSG_TMPLT.format(self.training_type,
-            self.duration, self.distance, self.speed, 
-            self.calories)
+                                    self.duration, self.distance,
+                                    self.speed, self.calories)
 
 
 class Training:
@@ -66,7 +67,7 @@ class Running(Training):
         SPD_DIFF = 20
         return ((SPD_MULT * self.get_mean_speed()
                 - SPD_DIFF) * self.weight
-            / self.M_IN_KM * self.duration * 60)
+                / self.M_IN_KM * self.duration * 60)
 
 
 class SportsWalking(Training):
@@ -117,7 +118,8 @@ class Swimming(Training):
     def get_spent_calories(self) -> float:
         SPD_SUM_COEF = 1.1
         WEIGHT_MULT = 2
-        val = (self.get_mean_speed() + SPD_SUM_COEF) * WEIGHT_MULT * self.weight
+        val = ((self.get_mean_speed() + SPD_SUM_COEF) 
+               * WEIGHT_MULT * self.weight)
         return val
 
 
