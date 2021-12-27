@@ -115,9 +115,9 @@ class Swimming(Training):
         return val
 
     def get_spent_calories(self) -> float:
-        cal_cff_1 = 1.1
-        cal_cff_2 = 2
-        val = (self.get_mean_speed() + cal_cff_1) * cal_cff_2 * self.weight
+        SPD_SUM_COEF = 1.1
+        WEIGHT_MULT = 2
+        val = (self.get_mean_speed() + SPD_SUM_COEF) * WEIGHT_MULT * self.weight
         return val
 
 
