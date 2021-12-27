@@ -111,7 +111,7 @@ class Swimming(Training):
 
     def get_mean_speed(self) -> float:
         val = (self.length_pool * self.count_pool
-               / Training.M_IN_KM / self.duration)
+               / self.M_IN_KM / self.duration)
         return val
 
     def get_spent_calories(self) -> float:
