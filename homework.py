@@ -98,7 +98,8 @@ class SportsWalking(Training):
         return (
             (WEIGHT_MULT1 * self.weight
                 + (self.get_mean_speed() ** 2 // self.height)
-                * WEIGHT_MULT2 * self.weight) * self.duration * self.SEC_IN_HOUR
+                * WEIGHT_MULT2 * self.weight) * self.duration 
+            * self.SEC_IN_HOUR
         )
 
 
