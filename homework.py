@@ -74,7 +74,7 @@ class Running(Training):
         SPEED_DIFF = 20
         return (
             (SPEED_MULT * self.get_mean_speed()
-            - SPEED_DIFF) * self.weight
+                - SPEED_DIFF) * self.weight
             / self.M_IN_KM * self.duration * self.SEC_IN_HOUR
         )
 
@@ -97,8 +97,8 @@ class SportsWalking(Training):
         WEIGHT_MULT2 = 0.029
         return (
             (WEIGHT_MULT1 * self.weight
-            + (self.get_mean_speed() ** 2 // self.height)
-            * WEIGHT_MULT2 * self.weight) * self.duration * self.SEC_IN_HOUR
+                + (self.get_mean_speed() ** 2 // self.height)
+                * WEIGHT_MULT2 * self.weight) * self.duration * self.SEC_IN_HOUR
         )
 
 
