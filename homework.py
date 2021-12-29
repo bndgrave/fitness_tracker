@@ -19,12 +19,6 @@ class InfoMessage:
 
     def get_message(self) -> str:
         return self.OUT_MESSAGE.format(**asdict(self))
-        #     training_type = self.training_type,
-        #     duration = self.duration,
-        #     distance = self.distance,
-        #     speed = self.speed,
-        #     calories = self.calories
-        # )
 
 
 class Training:
@@ -32,7 +26,7 @@ class Training:
 
     M_IN_KM = 1000
     LEN_STEP = 0.65
-    SEC_IN_HOUR = 60
+    MIN_IN_HOUR = 60
 
     def __init__(self,
                  action: int,
@@ -75,7 +69,7 @@ class Running(Training):
         return (
             (SPEED_MULT * self.get_mean_speed()
                 - SPEED_DIFF) * self.weight
-            / self.M_IN_KM * self.duration * self.SEC_IN_HOUR
+            / self.M_IN_KM * self.duration * self.MIN_IN_HOUR
         )
 
 
@@ -99,7 +93,7 @@ class SportsWalking(Training):
             (WEIGHT_MULT1 * self.weight
                 + (self.get_mean_speed() ** 2 // self.height)
                 * WEIGHT_MULT2 * self.weight) * self.duration
-            * self.SEC_IN_HOUR
+            * self.MIN_IN_HOUR
         )
 
 
@@ -138,7 +132,7 @@ class Swimming(Training):
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     class_names = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    if workout_type not in class_names.keys():
+    if workout_type not in class_names:
         raise ValueError('Тип тренировки не определен')
     return class_names[workout_type](*data)
 
